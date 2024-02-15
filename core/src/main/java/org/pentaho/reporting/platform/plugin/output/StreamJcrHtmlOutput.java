@@ -36,6 +36,7 @@ import org.pentaho.reporting.platform.plugin.async.IAsyncReportListener;
 import org.pentaho.reporting.platform.plugin.async.ReportListenerThreadHolder;
 import org.pentaho.reporting.platform.plugin.repository.PentahoNameGenerator;
 import org.pentaho.reporting.platform.plugin.repository.PentahoURLRewriter;
+import org.pentaho.reporting.platform.plugin.repository.PocBase64ImgSrcHardcodedPentahoURLRewriter;
 import org.pentaho.reporting.platform.plugin.repository.ReportContentRepository;
 
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class StreamJcrHtmlOutput extends AbstractHtmlOutput {
     FastHtmlContentItems contentItems = new FastHtmlContentItems();
     contentItems.setContentWriter( targetRoot, new DefaultNameGenerator( targetRoot, "index", "html" ) );
     contentItems.setDataWriter( dataLocation, dataNameGenerator );
-    contentItems.setUrlRewriter( new PentahoURLRewriter( getContentHandlerPattern(), true ) );
+    contentItems.setUrlRewriter( new PocBase64ImgSrcHardcodedPentahoURLRewriter(  new PentahoURLRewriter( getContentHandlerPattern(), true ) ) ); // POC added here
     return contentItems;
   }
 
