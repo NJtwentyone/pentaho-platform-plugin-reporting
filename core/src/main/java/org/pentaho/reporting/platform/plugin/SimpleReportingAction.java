@@ -889,6 +889,13 @@ public class SimpleReportingAction implements IStreamProcessingAction, IStreamin
         "org.pentaho.reporting.engine.classic.core.YieldRate", String.valueOf( yieldRate ) );
     }
 
+    // FIXME DEV hard coding setting inline CSS in <head>
+    // TODO pass in flag from EnterpriseSchedulerService.java#schedulerCreateJob  - https://github.com/pentaho/pentaho-scheduler-plugin-ee/blob/bc58095d7b2dc1d2b3a875c21f6ed3bb0356196c/core/src/main/java/com/pentaho/platform/web/http/api/resources/services/EnterpriseSchedulerService.java#L87-L88
+    // TODO set in ActionRunner.java similiar to ActionRunner#addJcrParams - should replace logic of using JCR flags - https://github.com/pentaho/pentaho-scheduler-plugin/blob/d3d500d77852d6fa7acb25060ed0cdbf3414dba0/core/src/main/java/org/pentaho/platform/scheduler2/action/ActionRunner.java#L169
+    // TODO get flag from this.inputs - see #getYieldRate()
+//    report.getReportConfiguration().setConfigProperty( HtmlTableModule.EXTERNALIZE_STYLE, "false" );
+    report.getReportConfiguration().setConfigProperty( HtmlTableModule.INLINE_STYLE, "false" ); // POC troubleshooting inlinestylemanager
+
     try {
       final DefaultParameterContext parameterContext = new DefaultParameterContext( report );
       // open parameter context
